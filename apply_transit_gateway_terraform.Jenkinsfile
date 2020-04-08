@@ -139,12 +139,34 @@ pipeline {
             }
         }
 
-# config_dir, env_name, git_project, component)
-
         stage('Apply Transit Gateway Configuration to delius-core-dev') {
           steps {
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-              do_terraform(project.config, 'delius-core-dev')
+              do_terraform(project.config, 'delius-core-dev', project.config, 'transit-gateway')
+            }
+          }
+        }
+
+        stage('Apply Transit Gateway Configuration to delius-stage') {
+          steps {
+            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+              do_terraform(project.config, 'delius-stage', project.config, 'transit-gateway')
+            }
+          }
+        }
+
+        stage('Apply Transit Gateway Configuration to delius-pre-prod') {
+          steps {
+            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+              do_terraform(project.config, 'delius-pre-prod', project.config, 'transit-gateway')
+            }
+          }
+        }
+
+        stage('Apply Transit Gateway Configuration to delius-prod') {
+          steps {
+            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+              do_terraform(project.config, 'delius-prod', project.config, 'transit-gateway')
             }
           }
         }
