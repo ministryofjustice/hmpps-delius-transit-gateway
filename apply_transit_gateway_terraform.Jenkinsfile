@@ -125,16 +125,25 @@ pipeline {
 
     agent { label "jenkins_slave" }
 
+    options {
+        disableConcurrentBuilds()
+    }
+
     parameters {
         string(name: 'CONFIG_BRANCH', description: 'Target Branch for hmpps-env-configs', defaultValue: 'master')
     }
 
     stages {
 
-        stage('Notify build started') {
+        stage('setup') {
             steps {
-                slackSend(message: "Transit Gateway Attachments to Cloud Platform VPC Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL.replace(':8080','')}|Open>)")
 
+                slackSend(message: "Transit Gateway Attachments to Cloud Platform VPC Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL.replace(':8080','')}|Open>)")
+            
+                dir( project.config ) {
+                    git url: 'git@github.com:ministryofjustice/' + project.config, branch: env.CONFIG_BRANCH, credentialsId: 'f44bc5f1-30bd-4ab9-ad61-cc32caf1562a'
+                }
+             
                 prepare_env()
             }
         }
