@@ -178,7 +178,7 @@ pipeline {
 
         }
         success {
-            slackSend(message: "Transit Gateway Build completed - ${env.JOB_NAME} ${env.BUILD_NUMBER} ", color: 'good')
+            slackSend(message: "Transit Gateway Build Completed - ${env.JOB_NAME} ${env.BUILD_NUMBER} ", color: 'good')
         }
         failure {
             slackSend(message: "Transit Gateway Build Completed - ${env.JOB_NAME} ${env.BUILD_NUMBER} ", color: 'danger')
