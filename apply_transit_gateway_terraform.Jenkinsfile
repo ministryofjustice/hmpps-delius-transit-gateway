@@ -131,9 +131,9 @@ pipeline {
 
     stages {
 
-        stage('setup') {
+        stage('Notify build started') {
             steps {
-                slackSend(message: "Build started on \"${environment_name}\" - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL.replace(':8080','')}|Open>)")
+                slackSend(message: "Transit Gateway Attachments to Cloud Platform VPC Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL.replace(':8080','')}|Open>)")
 
                 prepare_env()
             }
@@ -178,11 +178,10 @@ pipeline {
 
         }
         success {
-            slackSend(message: "Transit Gateway Build Completed - ${env.JOB_NAME} ${env.BUILD_NUMBER} ", color: 'good')
+            slackSend(message: "Transit Gateway Attachments to Cloud Platform VPC Build Completed - ${env.JOB_NAME} ${env.BUILD_NUMBER} ", color: 'good')
         }
         failure {
-            slackSend(message: "Transit Gateway Build Completed - ${env.JOB_NAME} ${env.BUILD_NUMBER} ", color: 'danger')
+            slackSend(message: "Transit Gateway Attachments to Cloud Platform VPC Build Completed - ${env.JOB_NAME} ${env.BUILD_NUMBER} ", color: 'danger')
         }
     }
-
 }
