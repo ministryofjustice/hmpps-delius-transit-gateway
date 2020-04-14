@@ -145,10 +145,10 @@ pipeline {
                 dir( project.config ) {
                     git url: 'git@github.com:ministryofjustice/' + project.config, branch: env.CONFIG_BRANCH, credentialsId: 'f44bc5f1-30bd-4ab9-ad61-cc32caf1562a'
                 }
-                dir( project.newtech ) {
+                dir( project.transit_gateway ) {
                   git url: 'git@github.com:ministryofjustice/' + project.transit_gateway, branch: env.TRANSIT_GATEWAY_BRANCH, credentialsId: 'f44bc5f1-30bd-4ab9-ad61-cc32caf1562a'
                 }
-                 prepare_env()
+                prepare_env()
             }
         }
 
