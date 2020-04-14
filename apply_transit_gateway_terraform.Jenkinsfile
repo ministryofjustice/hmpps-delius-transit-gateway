@@ -1,5 +1,6 @@
 def project = [:]
-project.config    = 'hmpps-env-configs'
+project.config          = 'hmpps-env-configs'
+project.transit_gateway = 'hmpps-delius-transit-gateway'
 
 def prepare_env() {
     sh '''
@@ -131,6 +132,7 @@ pipeline {
 
     parameters {
         string(name: 'CONFIG_BRANCH', description: 'Target Branch for hmpps-env-configs', defaultValue: 'master')
+        string(name: 'TRANSIT_GATEWAY_BRANCH', description: 'Target Branch for hmpps-delius-transit-gateway', defaultValue: 'master')
     }
 
     stages {
@@ -143,15 +145,17 @@ pipeline {
                 dir( project.config ) {
                     git url: 'git@github.com:ministryofjustice/' + project.config, branch: env.CONFIG_BRANCH, credentialsId: 'f44bc5f1-30bd-4ab9-ad61-cc32caf1562a'
                 }
-             
-                prepare_env()
+                dir( project.newtech ) {
+                  git url: 'git@github.com:ministryofjustice/' + project.transit_gateway, branch: env.TRANSIT_GATEWAY_BRANCH, credentialsId: 'f44bc5f1-30bd-4ab9-ad61-cc32caf1562a'
+                }
+                 prepare_env()
             }
         }
 
         stage('Apply Transit Gateway Configuration to delius-core-dev') {
           steps {
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-              do_terraform(project.config, 'delius-core-dev', project.config, 'transit-gateway')
+              do_terraform(project.config, 'delius-core-dev', project.transit_gateway, 'transit-gateway')
             }
           }
         }
@@ -159,7 +163,7 @@ pipeline {
         stage('Apply Transit Gateway Configuration to delius-stage') {
           steps {
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-              do_terraform(project.config, 'delius-stage', project.config, 'transit-gateway')
+              do_terraform(project.config, 'delius-stage', project.transit_gateway, 'transit-gateway')
             }
           }
         }
@@ -167,7 +171,7 @@ pipeline {
         stage('Apply Transit Gateway Configuration to delius-pre-prod') {
           steps {
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-              do_terraform(project.config, 'delius-pre-prod', project.config, 'transit-gateway')
+              do_terraform(project.config, 'delius-pre-prod', project.transit_gateway, 'transit-gateway')
             }
           }
         }
@@ -175,7 +179,7 @@ pipeline {
         stage('Apply Transit Gateway Configuration to delius-prod') {
           steps {
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-              do_terraform(project.config, 'delius-prod', project.config, 'transit-gateway')
+              do_terraform(project.config, 'delius-prod', project.transit_gateway, 'transit-gateway')
             }
           }
         }
