@@ -8,6 +8,7 @@ locals {
 
   transit_gateway_id       = "tgw-05acb84d26b244813"
   cloudplatform_cidr_range = "172.20.0.0/16"
+  transit_gateway_attachment_name = "tgwa-${local.environment_name}"
 
 #  public_subnets = [
 #    "${data.terraform_remote_state.vpc.vpc_public-subnet-az1}",

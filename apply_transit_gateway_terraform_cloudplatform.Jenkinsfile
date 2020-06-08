@@ -152,34 +152,34 @@ pipeline {
             }
         }
 
-        stage('Apply Transit Gateway Configuration to delius-core-dev') {
+        stage('Apply CloudPlatform Transit Gateway Configuration to delius-core-dev') {
           steps {
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-              do_terraform(project.config, 'delius-core-dev', project.transit_gateway, 'transit-gateway')
+              do_terraform(project.config, 'delius-core-dev', project.transit_gateway, 'transit-gateway-cloud-platform')
             }
           }
         }
 
-        stage('Apply Transit Gateway Configuration to delius-stage') {
+        stage('Apply CloudPlatform Transit Gateway Configuration to delius-stage') {
           steps {
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-              do_terraform(project.config, 'delius-stage', project.transit_gateway, 'transit-gateway')
+              do_terraform(project.config, 'delius-stage', project.transit_gateway, 'transit-gateway-cloud-platform')
             }
           }
         }
 
-        stage('Apply Transit Gateway Configuration to delius-pre-prod') {
+        stage('Apply CloudPlatform Transit Gateway Configuration to delius-pre-prod') {
           steps {
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-              do_terraform(project.config, 'delius-pre-prod', project.transit_gateway, 'transit-gateway')
+              do_terraform(project.config, 'delius-pre-prod', project.transit_gateway, 'transit-gateway-cloud-platform')
             }
           }
         }
 
-        stage('Apply Transit Gateway Configuration to delius-prod') {
+        stage('Apply CloudPlatform Transit Gateway Configuration to delius-prod') {
           steps {
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-              do_terraform(project.config, 'delius-prod', project.transit_gateway, 'transit-gateway')
+              do_terraform(project.config, 'delius-prod', project.transit_gateway, 'transit-gateway-cloud-platform')
             }
           }
         }
