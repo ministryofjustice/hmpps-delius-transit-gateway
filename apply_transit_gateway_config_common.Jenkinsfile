@@ -200,10 +200,10 @@ pipeline {
 
         }
         success {
-            slackSend(message: "Transit Gateway Attachments to Cloud Platform VPC Build Completed - ${env.JOB_NAME} ${env.BUILD_NUMBER} ", color: 'good')
+            slackSend(message: "Transit Gateway Attachments to Common Build Completed - ${env.JOB_NAME} ${env.BUILD_NUMBER} ", color: 'good')
         }
         failure {
-            slackSend(message: "Transit Gateway Attachments to Cloud Platform VPC Build Failed - ${env.JOB_NAME} ${env.BUILD_NUMBER} ", color: 'danger')
+            slackSend(message: "Transit Gateway Attachments to Common Build Failed - ${env.JOB_NAME} ${env.BUILD_NUMBER} ", color: 'danger')
         }
     }
 }
