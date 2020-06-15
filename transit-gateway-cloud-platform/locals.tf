@@ -6,9 +6,10 @@ locals {
   environment_name = "${var.project_name}-${var.environment_type}"
   account_ids      = "${var.aws_account_ids}"
 
-  transit_gateway_id       = "tgw-05acb84d26b244813"
+  transit_gateway_id = "${data.terraform_remote_state.common.transit_gateway_id}"
+
   cloudplatform_cidr_range = "172.20.0.0/16"
-  transit_gateway_attachment_name = "tgwa-${local.environment_name}"
+  transit_gateway_attachment_name = "tgwa-${local.environment_name}-cloudplatform"
 
 #  public_subnets = [
 #    "${data.terraform_remote_state.vpc.vpc_public-subnet-az1}",

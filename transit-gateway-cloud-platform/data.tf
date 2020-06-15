@@ -1,8 +1,3 @@
-#====================================================
-# remote state for cloudplatform
-#====================================================
-
-
 
 #====================================================
 # remote state for target env (delius-core-dev)
@@ -21,3 +16,18 @@ data "terraform_remote_state" "vpc" {
 
 # Get current context for things like account id
 data "aws_caller_identity" "current" {}
+
+
+#====================================================
+# remote state for common
+#====================================================
+
+data "terraform_remote_state" "common" {
+  backend = "s3"
+
+  config {
+    bucket = "${var.remote_state_bucket_name}"
+    key    = "common/terraform.tfstate"
+    region = "${var.region}"
+  }
+}

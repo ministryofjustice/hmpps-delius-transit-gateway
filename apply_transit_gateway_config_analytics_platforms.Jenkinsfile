@@ -152,6 +152,7 @@ pipeline {
             }
         }
 
+  
         stage('Apply Analytics Platform Transit Gateway Configuration to delius-core-dev') {
           steps {
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {

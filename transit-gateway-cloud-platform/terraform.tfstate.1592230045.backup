@@ -1,0 +1,534 @@
+{
+    "version": 3,
+    "terraform_version": "0.11.8",
+    "serial": 27,
+    "lineage": "8c19b7bd-5d2e-4608-cbc3-38ea16feebaf",
+    "modules": [
+        {
+            "path": [
+                "root"
+            ],
+            "outputs": {
+                "transit_gateway_attachment_id": {
+                    "sensitive": false,
+                    "type": "string",
+                    "value": "tgw-attach-0b5caf5d6593c30b1"
+                },
+                "transit_gateway_id": {
+                    "sensitive": false,
+                    "type": "string",
+                    "value": "tgw-05acb84d26b244813"
+                }
+            },
+            "resources": {
+                "aws_ec2_transit_gateway_vpc_attachment.delius_transit_gw_attachment": {
+                    "type": "aws_ec2_transit_gateway_vpc_attachment",
+                    "depends_on": [
+                        "local.private_subnets",
+                        "local.transit_gateway_attachment_name",
+                        "local.transit_gateway_id",
+                        "local.vpc_id"
+                    ],
+                    "primary": {
+                        "id": "tgw-attach-0b5caf5d6593c30b1",
+                        "attributes": {
+                            "dns_support": "enable",
+                            "id": "tgw-attach-0b5caf5d6593c30b1",
+                            "ipv6_support": "disable",
+                            "subnet_ids.#": "3",
+                            "subnet_ids.3466082833": "subnet-01da8aefdd15983ec",
+                            "subnet_ids.4044040364": "subnet-0ad3aacaeae7fa831",
+                            "subnet_ids.4243446482": "subnet-01698e02f6582036b",
+                            "tags.%": "13",
+                            "tags.Name": "tgwa-delius-core-dev-cloudplatform",
+                            "tags.application": "delius-core",
+                            "tags.autostop-dev": "True",
+                            "tags.bastion_inventory": "dev",
+                            "tags.business-unit": "hmpps",
+                            "tags.environment": "dev",
+                            "tags.environment-name": "delius-core-dev",
+                            "tags.infrastructure-support": "Digital Studio",
+                            "tags.is-production": "false",
+                            "tags.owner": "Digital Studio",
+                            "tags.provisioned-with": "Terraform",
+                            "tags.region": "eu-west-2",
+                            "tags.source-code": "https://github.com/ministryofjustice/hmpps-delius-transit-gateway",
+                            "transit_gateway_default_route_table_association": "true",
+                            "transit_gateway_default_route_table_propagation": "true",
+                            "transit_gateway_id": "tgw-05acb84d26b244813",
+                            "vpc_id": "vpc-0c3ff172d65f5d1ac",
+                            "vpc_owner_id": "723123699647"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_route.transit_gateway_route_vpc_db-routetable-az1": {
+                    "type": "aws_route",
+                    "depends_on": [
+                        "data.terraform_remote_state.vpc",
+                        "local.cloudplatform_cidr_range",
+                        "local.transit_gateway_id"
+                    ],
+                    "primary": {
+                        "id": "r-rtb-0c9580eb4c9b7b8131046898794",
+                        "attributes": {
+                            "destination_cidr_block": "172.20.0.0/16",
+                            "destination_prefix_list_id": "",
+                            "egress_only_gateway_id": "",
+                            "gateway_id": "",
+                            "id": "r-rtb-0c9580eb4c9b7b8131046898794",
+                            "instance_id": "",
+                            "instance_owner_id": "",
+                            "nat_gateway_id": "",
+                            "network_interface_id": "",
+                            "origin": "CreateRoute",
+                            "route_table_id": "rtb-0c9580eb4c9b7b813",
+                            "state": "active",
+                            "transit_gateway_id": "tgw-05acb84d26b244813",
+                            "vpc_peering_connection_id": ""
+                        },
+                        "meta": {
+                            "e2bfb730-ecaa-11e6-8f88-34363bc7c4c0": {
+                                "create": 120000000000,
+                                "delete": 300000000000
+                            }
+                        },
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_route.transit_gateway_route_vpc_db-routetable-az2": {
+                    "type": "aws_route",
+                    "depends_on": [
+                        "data.terraform_remote_state.vpc",
+                        "local.cloudplatform_cidr_range",
+                        "local.transit_gateway_id"
+                    ],
+                    "primary": {
+                        "id": "r-rtb-0c22216a4fa88521b1046898794",
+                        "attributes": {
+                            "destination_cidr_block": "172.20.0.0/16",
+                            "destination_prefix_list_id": "",
+                            "egress_only_gateway_id": "",
+                            "gateway_id": "",
+                            "id": "r-rtb-0c22216a4fa88521b1046898794",
+                            "instance_id": "",
+                            "instance_owner_id": "",
+                            "nat_gateway_id": "",
+                            "network_interface_id": "",
+                            "origin": "CreateRoute",
+                            "route_table_id": "rtb-0c22216a4fa88521b",
+                            "state": "active",
+                            "transit_gateway_id": "tgw-05acb84d26b244813",
+                            "vpc_peering_connection_id": ""
+                        },
+                        "meta": {
+                            "e2bfb730-ecaa-11e6-8f88-34363bc7c4c0": {
+                                "create": 120000000000,
+                                "delete": 300000000000
+                            }
+                        },
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_route.transit_gateway_route_vpc_db-routetable-az3": {
+                    "type": "aws_route",
+                    "depends_on": [
+                        "data.terraform_remote_state.vpc",
+                        "local.cloudplatform_cidr_range",
+                        "local.transit_gateway_id"
+                    ],
+                    "primary": {
+                        "id": "r-rtb-072459ae6f103589d1046898794",
+                        "attributes": {
+                            "destination_cidr_block": "172.20.0.0/16",
+                            "destination_prefix_list_id": "",
+                            "egress_only_gateway_id": "",
+                            "gateway_id": "",
+                            "id": "r-rtb-072459ae6f103589d1046898794",
+                            "instance_id": "",
+                            "instance_owner_id": "",
+                            "nat_gateway_id": "",
+                            "network_interface_id": "",
+                            "origin": "CreateRoute",
+                            "route_table_id": "rtb-072459ae6f103589d",
+                            "state": "active",
+                            "transit_gateway_id": "tgw-05acb84d26b244813",
+                            "vpc_peering_connection_id": ""
+                        },
+                        "meta": {
+                            "e2bfb730-ecaa-11e6-8f88-34363bc7c4c0": {
+                                "create": 120000000000,
+                                "delete": 300000000000
+                            }
+                        },
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_route.transit_gateway_route_vpc_private-routetable-az1": {
+                    "type": "aws_route",
+                    "depends_on": [
+                        "data.terraform_remote_state.vpc",
+                        "local.cloudplatform_cidr_range",
+                        "local.transit_gateway_id"
+                    ],
+                    "primary": {
+                        "id": "r-rtb-0a98b0f3d4976d5541046898794",
+                        "attributes": {
+                            "destination_cidr_block": "172.20.0.0/16",
+                            "destination_prefix_list_id": "",
+                            "egress_only_gateway_id": "",
+                            "gateway_id": "",
+                            "id": "r-rtb-0a98b0f3d4976d5541046898794",
+                            "instance_id": "",
+                            "instance_owner_id": "",
+                            "nat_gateway_id": "",
+                            "network_interface_id": "",
+                            "origin": "CreateRoute",
+                            "route_table_id": "rtb-0a98b0f3d4976d554",
+                            "state": "active",
+                            "transit_gateway_id": "tgw-05acb84d26b244813",
+                            "vpc_peering_connection_id": ""
+                        },
+                        "meta": {
+                            "e2bfb730-ecaa-11e6-8f88-34363bc7c4c0": {
+                                "create": 120000000000,
+                                "delete": 300000000000
+                            }
+                        },
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_route.transit_gateway_route_vpc_private-routetable-az2": {
+                    "type": "aws_route",
+                    "depends_on": [
+                        "data.terraform_remote_state.vpc",
+                        "local.cloudplatform_cidr_range",
+                        "local.transit_gateway_id"
+                    ],
+                    "primary": {
+                        "id": "r-rtb-0745e2c32a6eb0e211046898794",
+                        "attributes": {
+                            "destination_cidr_block": "172.20.0.0/16",
+                            "destination_prefix_list_id": "",
+                            "egress_only_gateway_id": "",
+                            "gateway_id": "",
+                            "id": "r-rtb-0745e2c32a6eb0e211046898794",
+                            "instance_id": "",
+                            "instance_owner_id": "",
+                            "nat_gateway_id": "",
+                            "network_interface_id": "",
+                            "origin": "CreateRoute",
+                            "route_table_id": "rtb-0745e2c32a6eb0e21",
+                            "state": "active",
+                            "transit_gateway_id": "tgw-05acb84d26b244813",
+                            "vpc_peering_connection_id": ""
+                        },
+                        "meta": {
+                            "e2bfb730-ecaa-11e6-8f88-34363bc7c4c0": {
+                                "create": 120000000000,
+                                "delete": 300000000000
+                            }
+                        },
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_route.transit_gateway_route_vpc_private-routetable-az3": {
+                    "type": "aws_route",
+                    "depends_on": [
+                        "data.terraform_remote_state.vpc",
+                        "local.cloudplatform_cidr_range",
+                        "local.transit_gateway_id"
+                    ],
+                    "primary": {
+                        "id": "r-rtb-0d2a57e9a31fc53fb1046898794",
+                        "attributes": {
+                            "destination_cidr_block": "172.20.0.0/16",
+                            "destination_prefix_list_id": "",
+                            "egress_only_gateway_id": "",
+                            "gateway_id": "",
+                            "id": "r-rtb-0d2a57e9a31fc53fb1046898794",
+                            "instance_id": "",
+                            "instance_owner_id": "",
+                            "nat_gateway_id": "",
+                            "network_interface_id": "",
+                            "origin": "CreateRoute",
+                            "route_table_id": "rtb-0d2a57e9a31fc53fb",
+                            "state": "active",
+                            "transit_gateway_id": "tgw-05acb84d26b244813",
+                            "vpc_peering_connection_id": ""
+                        },
+                        "meta": {
+                            "e2bfb730-ecaa-11e6-8f88-34363bc7c4c0": {
+                                "create": 120000000000,
+                                "delete": 300000000000
+                            }
+                        },
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_route.transit_gateway_route_vpc_public-routetable-az1": {
+                    "type": "aws_route",
+                    "depends_on": [
+                        "data.terraform_remote_state.vpc",
+                        "local.cloudplatform_cidr_range",
+                        "local.transit_gateway_id"
+                    ],
+                    "primary": {
+                        "id": "r-rtb-0c10f00f49213ed401046898794",
+                        "attributes": {
+                            "destination_cidr_block": "172.20.0.0/16",
+                            "destination_prefix_list_id": "",
+                            "egress_only_gateway_id": "",
+                            "gateway_id": "",
+                            "id": "r-rtb-0c10f00f49213ed401046898794",
+                            "instance_id": "",
+                            "instance_owner_id": "",
+                            "nat_gateway_id": "",
+                            "network_interface_id": "",
+                            "origin": "CreateRoute",
+                            "route_table_id": "rtb-0c10f00f49213ed40",
+                            "state": "active",
+                            "transit_gateway_id": "tgw-05acb84d26b244813",
+                            "vpc_peering_connection_id": ""
+                        },
+                        "meta": {
+                            "e2bfb730-ecaa-11e6-8f88-34363bc7c4c0": {
+                                "create": 120000000000,
+                                "delete": 300000000000
+                            }
+                        },
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_route.transit_gateway_route_vpc_public-routetable-az2": {
+                    "type": "aws_route",
+                    "depends_on": [
+                        "data.terraform_remote_state.vpc",
+                        "local.cloudplatform_cidr_range",
+                        "local.transit_gateway_id"
+                    ],
+                    "primary": {
+                        "id": "r-rtb-0176b42ced7509d941046898794",
+                        "attributes": {
+                            "destination_cidr_block": "172.20.0.0/16",
+                            "destination_prefix_list_id": "",
+                            "egress_only_gateway_id": "",
+                            "gateway_id": "",
+                            "id": "r-rtb-0176b42ced7509d941046898794",
+                            "instance_id": "",
+                            "instance_owner_id": "",
+                            "nat_gateway_id": "",
+                            "network_interface_id": "",
+                            "origin": "CreateRoute",
+                            "route_table_id": "rtb-0176b42ced7509d94",
+                            "state": "active",
+                            "transit_gateway_id": "tgw-05acb84d26b244813",
+                            "vpc_peering_connection_id": ""
+                        },
+                        "meta": {
+                            "e2bfb730-ecaa-11e6-8f88-34363bc7c4c0": {
+                                "create": 120000000000,
+                                "delete": 300000000000
+                            }
+                        },
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_route.transit_gateway_route_vpc_public-routetable-az3": {
+                    "type": "aws_route",
+                    "depends_on": [
+                        "data.terraform_remote_state.vpc",
+                        "local.cloudplatform_cidr_range",
+                        "local.transit_gateway_id"
+                    ],
+                    "primary": {
+                        "id": "r-rtb-0c9580eb4c9b7b8131046898794",
+                        "attributes": {
+                            "destination_cidr_block": "172.20.0.0/16",
+                            "destination_prefix_list_id": "",
+                            "egress_only_gateway_id": "",
+                            "gateway_id": "",
+                            "id": "r-rtb-0c9580eb4c9b7b8131046898794",
+                            "instance_id": "",
+                            "instance_owner_id": "",
+                            "nat_gateway_id": "",
+                            "network_interface_id": "",
+                            "origin": "CreateRoute",
+                            "route_table_id": "rtb-0c9580eb4c9b7b813",
+                            "state": "active",
+                            "transit_gateway_id": "tgw-05acb84d26b244813",
+                            "vpc_peering_connection_id": ""
+                        },
+                        "meta": {
+                            "e2bfb730-ecaa-11e6-8f88-34363bc7c4c0": {
+                                "create": 120000000000,
+                                "delete": 300000000000
+                            }
+                        },
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "data.aws_caller_identity.current": {
+                    "type": "aws_caller_identity",
+                    "depends_on": [],
+                    "primary": {
+                        "id": "2020-06-15 13:56:28.343668008 +0000 UTC",
+                        "attributes": {
+                            "account_id": "723123699647",
+                            "arn": "arn:aws:sts::723123699647:assumed-role/terraform/terragrunt-1592229380031939538",
+                            "id": "2020-06-15 13:56:28.343668008 +0000 UTC",
+                            "user_id": "AROAJMASSQED5GT6WQF5Q:terragrunt-1592229380031939538"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "data.terraform_remote_state.common": {
+                    "type": "terraform_remote_state",
+                    "depends_on": [],
+                    "primary": {
+                        "id": "2020-06-15 13:56:27.666696417 +0000 UTC",
+                        "attributes": {
+                            "backend": "s3",
+                            "config.%": "3",
+                            "config.bucket": "tf-eu-west-2-hmpps-delius-core-dev-remote-state",
+                            "config.key": "common/terraform.tfstate",
+                            "config.region": "eu-west-2",
+                            "environment": "default",
+                            "id": "2020-06-15 13:56:27.666696417 +0000 UTC",
+                            "transit_gateway_id": "tgw-05acb84d26b244813",
+                            "workspace": "default"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.terraform"
+                },
+                "data.terraform_remote_state.vpc": {
+                    "type": "terraform_remote_state",
+                    "depends_on": [],
+                    "primary": {
+                        "id": "2020-06-15 13:56:27.759192493 +0000 UTC",
+                        "attributes": {
+                            "backend": "s3",
+                            "bastion_inventory": "dev",
+                            "bastion_remote_state_bucket_name": "tf-eu-west-2-hmpps-bastion-dev-remote-state",
+                            "bastion_role_arn": "arn:aws:iam::895523100917:role/terraform",
+                            "bastion_vpc_account_id": "895523100917",
+                            "bastion_vpc_id": "vpc-00d48e9851c261b47",
+                            "bastion_vpc_public_cidr.%": "3",
+                            "bastion_vpc_public_cidr.az1": "10.161.98.0/28",
+                            "bastion_vpc_public_cidr.az2": "10.161.98.16/28",
+                            "bastion_vpc_public_cidr.az3": "10.161.98.32/28",
+                            "config.%": "3",
+                            "config.bucket": "tf-eu-west-2-hmpps-delius-core-dev-remote-state",
+                            "config.key": "vpc/terraform.tfstate",
+                            "config.region": "eu-west-2",
+                            "eng_vpc_account_id": "895523100917",
+                            "eng_vpc_cidr": "10.161.96.0/24",
+                            "eng_vpc_id": "vpc-02321f288159e5d0e",
+                            "environment": "default",
+                            "environment_name": "delius-core-dev",
+                            "id": "2020-06-15 13:56:27.759192493 +0000 UTC",
+                            "private_zone_id": "Z3K1XPXZ6S3VS9",
+                            "private_zone_name": "delius-core-dev.internal",
+                            "public_ssl_arn": "arn:aws:acm:eu-west-2:723123699647:certificate/1366549d-a1f4-4c1e-8a8e-9a3fe952dec0",
+                            "public_ssl_domain": "*.dev.delius-core.probation.hmpps.dsd.io",
+                            "public_zone_id": "Z2QF2SEPISTMNB",
+                            "public_zone_name": "dev.delius-core.probation.hmpps.dsd.io",
+                            "ssh_deployer_key": "tf-eu-west-2-hmpps-delius-core-dev-ssh-key",
+                            "strategic_public_ssl_arn.#": "1",
+                            "strategic_public_ssl_arn.0": "arn:aws:acm:eu-west-2:723123699647:certificate/694f0390-c001-4d8e-9e5f-70a421329ef1",
+                            "strategic_public_zone_id": "Z3JN6545N8RW90",
+                            "strategic_public_zone_name": "dev.probation.service.justice.gov.uk",
+                            "tags.%": "12",
+                            "tags.application": "delius-core",
+                            "tags.autostop-dev": "True",
+                            "tags.bastion_inventory": "dev",
+                            "tags.business-unit": "hmpps",
+                            "tags.environment": "dev",
+                            "tags.environment-name": "delius-core-dev",
+                            "tags.infrastructure-support": "Digital Studio",
+                            "tags.is-production": "false",
+                            "tags.owner": "Digital Studio",
+                            "tags.provisioned-with": "Terraform",
+                            "tags.region": "eu-west-2",
+                            "tags.source-code": "https://github.com/ministryofjustice/hmpps-delius-network-terraform",
+                            "vpc_account_id": "723123699647",
+                            "vpc_cidr_block": "10.161.20.0/22",
+                            "vpc_db-routetable-az1": "rtb-0c9580eb4c9b7b813",
+                            "vpc_db-routetable-az2": "rtb-0c22216a4fa88521b",
+                            "vpc_db-routetable-az3": "rtb-072459ae6f103589d",
+                            "vpc_db-subnet-az1": "subnet-0435ad84bcea1d4c3",
+                            "vpc_db-subnet-az1-availability_zone": "eu-west-2a",
+                            "vpc_db-subnet-az1-cidr_block": "10.161.23.0/26",
+                            "vpc_db-subnet-az2": "subnet-0adf6066ba072cf89",
+                            "vpc_db-subnet-az2-availability_zone": "eu-west-2b",
+                            "vpc_db-subnet-az2-cidr_block": "10.161.23.64/26",
+                            "vpc_db-subnet-az3": "subnet-05b55966a54572682",
+                            "vpc_db-subnet-az3-availability_zone": "eu-west-2c",
+                            "vpc_db-subnet-az3-cidr_block": "10.161.23.128/27",
+                            "vpc_id": "vpc-0c3ff172d65f5d1ac",
+                            "vpc_private-routetable-az1": "rtb-0a98b0f3d4976d554",
+                            "vpc_private-routetable-az2": "rtb-0745e2c32a6eb0e21",
+                            "vpc_private-routetable-az3": "rtb-0d2a57e9a31fc53fb",
+                            "vpc_private-subnet-az1": "subnet-01698e02f6582036b",
+                            "vpc_private-subnet-az1-availability_zone": "eu-west-2a",
+                            "vpc_private-subnet-az1-cidr_block": "10.161.20.0/24",
+                            "vpc_private-subnet-az2": "subnet-0ad3aacaeae7fa831",
+                            "vpc_private-subnet-az2-availability_zone": "eu-west-2b",
+                            "vpc_private-subnet-az2-cidr_block": "10.161.21.0/24",
+                            "vpc_private-subnet-az3": "subnet-01da8aefdd15983ec",
+                            "vpc_private-subnet-az3-availability_zone": "eu-west-2c",
+                            "vpc_private-subnet-az3-cidr_block": "10.161.22.0/24",
+                            "vpc_public-routetable-az1": "rtb-0c10f00f49213ed40",
+                            "vpc_public-routetable-az2": "rtb-0176b42ced7509d94",
+                            "vpc_public-routetable-az3": "rtb-0e46c97e14ef0e450",
+                            "vpc_public-subnet-az1": "subnet-00898250bf6223821",
+                            "vpc_public-subnet-az1-availability_zone": "eu-west-2a",
+                            "vpc_public-subnet-az1-cidr_block": "10.161.23.160/27",
+                            "vpc_public-subnet-az2": "subnet-00998483a288b6715",
+                            "vpc_public-subnet-az2-availability_zone": "eu-west-2b",
+                            "vpc_public-subnet-az2-cidr_block": "10.161.23.192/27",
+                            "vpc_public-subnet-az3": "subnet-0cd20006f8956fee5",
+                            "vpc_public-subnet-az3-availability_zone": "eu-west-2c",
+                            "vpc_public-subnet-az3-cidr_block": "10.161.23.224/27",
+                            "vpc_remote_state_bucket_name": "tf-eu-west-2-hmpps-delius-core-dev-remote-state",
+                            "vpc_role_arn": "arn:aws:iam::723123699647:role/terraform",
+                            "workspace": "default"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.terraform"
+                }
+            },
+            "depends_on": []
+        }
+    ]
+}
