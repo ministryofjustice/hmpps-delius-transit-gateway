@@ -156,7 +156,7 @@ pipeline {
         stage('Apply Analytics Platform Transit Gateway Configuration to delius-core-dev') {
           steps {
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-              do_terraform(project.config, 'delius-core-dev', project.transit_gateway, 'common')
+              do_terraform(project.config, 'delius-core-dev', project.transit_gateway, 'transit-gateway-common')
             }
           }
         }
@@ -164,7 +164,7 @@ pipeline {
         stage('Apply Analytics Platform Transit Gateway Configuration to delius-core-sandpit') {
           steps {
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-              do_terraform(project.config, 'delius-core-sandpit', project.transit_gateway, 'common')
+              do_terraform(project.config, 'delius-core-sandpit', project.transit_gateway, 'transit-gateway-common')
             }
           }
         }
@@ -172,7 +172,7 @@ pipeline {
         stage('Apply Analytics Platform Transit Gateway Configuration to delius-stage') {
           steps {
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-              do_terraform(project.config, 'delius-stage', project.transit_gateway, 'common')
+              do_terraform(project.config, 'delius-stage', project.transit_gateway, 'transit-gateway-common')
             }
           }
         }
@@ -180,7 +180,7 @@ pipeline {
         stage('Apply Analytics Platform Transit Gateway Configuration to delius-pre-prod') {
           steps {
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-              do_terraform(project.config, 'delius-pre-prod', project.transit_gateway, 'common')
+              do_terraform(project.config, 'delius-pre-prod', project.transit_gateway, 'transit-gateway-common')
             }
           }
         }
@@ -188,7 +188,7 @@ pipeline {
         stage('Apply Analytics Platform Transit Gateway Configuration to delius-prod') {
           steps {
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-              do_terraform(project.config, 'delius-prod', project.transit_gateway, 'common')
+              do_terraform(project.config, 'delius-prod', project.transit_gateway, 'transit-gateway-common')
             }
           }
         }
@@ -203,7 +203,7 @@ pipeline {
             slackSend(message: "Transit Gateway Attachments to Cloud Platform VPC Build Completed - ${env.JOB_NAME} ${env.BUILD_NUMBER} ", color: 'good')
         }
         failure {
-            slackSend(message: "Transit Gateway Attachments to Cloud Platform VPC Build Completed - ${env.JOB_NAME} ${env.BUILD_NUMBER} ", color: 'danger')
+            slackSend(message: "Transit Gateway Attachments to Cloud Platform VPC Build Failed - ${env.JOB_NAME} ${env.BUILD_NUMBER} ", color: 'danger')
         }
     }
 }

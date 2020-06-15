@@ -160,6 +160,14 @@ pipeline {
           }
         }
 
+        stage('Apply CloudPlatform Transit Gateway Configuration to delius-core-sandpit') {
+          steps {
+            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+              do_terraform(project.config, 'delius-core-sandpit', project.transit_gateway, 'transit-gateway-cloud-platform')
+            }
+          }
+        }
+
         stage('Apply CloudPlatform Transit Gateway Configuration to delius-stage') {
           steps {
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
