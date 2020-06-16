@@ -122,6 +122,14 @@ def debug_env() {
     '''
 }
 
+def accounts = [
+    "delius-core-dev",
+    "delius-core-sandpit",
+    "delius-stage",
+    "delius-pre-prod",
+    "delius-prod"
+]
+
 pipeline {
 
     agent { label "jenkins_slave" }
@@ -152,37 +160,18 @@ pipeline {
             }
         }
 
-        stage('Apply Transit Gateway Configuration to delius-core-dev') {
+        stage('Apply Common Transit Gateway Configuration to accounts') {
           steps {
-            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-              do_terraform(project.config, 'delius-core-dev', project.transit_gateway, 'transit-gateway')
-            }
+              script {
+                  for (account in accounts) {
+                      catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                        do_terraform(project.config, 'delius-core-dev', project.transit_gateway, 'transit-gateway-common')
+                      }
+                  }
+              }
           }
         }
-
-        stage('Apply Transit Gateway Configuration to delius-stage') {
-          steps {
-            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-              do_terraform(project.config, 'delius-stage', project.transit_gateway, 'transit-gateway')
-            }
-          }
-        }
-
-        stage('Apply Transit Gateway Configuration to delius-pre-prod') {
-          steps {
-            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-              do_terraform(project.config, 'delius-pre-prod', project.transit_gateway, 'transit-gateway')
-            }
-          }
-        }
-
-        stage('Apply Transit Gateway Configuration to delius-prod') {
-          steps {
-            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-              do_terraform(project.config, 'delius-prod', project.transit_gateway, 'transit-gateway')
-            }
-          }
-        }
+  
     }
 
     post {
@@ -191,10 +180,10 @@ pipeline {
 
         }
         success {
-            slackSend(message: "Transit Gateway Attachments to Cloud Platform VPC Build Completed - ${env.JOB_NAME} ${env.BUILD_NUMBER} ", color: 'good')
+            slackSend(message: "Transit Gateway Attachments to Common Build Completed - ${env.JOB_NAME} ${env.BUILD_NUMBER} ", color: 'good')
         }
         failure {
-            slackSend(message: "Transit Gateway Attachments to Cloud Platform VPC Build Completed - ${env.JOB_NAME} ${env.BUILD_NUMBER} ", color: 'danger')
+            slackSend(message: "Transit Gateway Attachments to Common Build Failed - ${env.JOB_NAME} ${env.BUILD_NUMBER} ", color: 'danger')
         }
     }
 }

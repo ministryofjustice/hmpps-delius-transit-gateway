@@ -1,11 +1,19 @@
 #====================================================
-# remote state for cloudplatform
+# remote state for common (transit gw id)
 #====================================================
 
+data "terraform_remote_state" "common" {
+  backend = "s3"
 
+  config {
+    bucket = "${var.remote_state_bucket_name}"
+    key    = "common/terraform.tfstate"
+    region = "${var.region}"
+  }
+}
 
 #====================================================
-# remote state for target env (delius-core-dev)
+# remote state for target env (route tables)
 #====================================================
 
 # Load in VPC state data for subnet placement
