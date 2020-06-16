@@ -165,7 +165,7 @@ pipeline {
               script {
                   for (account in accounts) {
                       catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                        do_terraform(project.config, 'delius-core-dev', project.transit_gateway, 'transit-gateway-common')
+                        do_terraform(project.config, account, project.transit_gateway, 'transit-gateway-common')
                       }
                   }
               }
