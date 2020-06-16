@@ -1,5 +1,5 @@
 #====================================================
-# remote state for common
+# remote state for common (transit gw id)
 #====================================================
 
 data "terraform_remote_state" "common" {
@@ -13,7 +13,7 @@ data "terraform_remote_state" "common" {
 }
 
 #====================================================
-# remote state for target env 
+# remote state for target env (route tables)
 #====================================================
 
 # Load in VPC state data for subnet placement

@@ -1,6 +1,5 @@
-
 #====================================================
-# remote state for target env (delius-core-dev)
+# remote state for target env (route tables)
 #====================================================
 
 # Load in VPC state data for subnet placement
@@ -17,9 +16,8 @@ data "terraform_remote_state" "vpc" {
 # Get current context for things like account id
 data "aws_caller_identity" "current" {}
 
-
 #====================================================
-# remote state for common
+# remote state for common (transit gateway id)
 #====================================================
 
 data "terraform_remote_state" "common" {
