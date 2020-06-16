@@ -122,6 +122,14 @@ def debug_env() {
     '''
 }
 
+def accounts = [
+    "delius-core-dev",
+    "delius-core-sandpit",
+    "delius-stage",
+    "delius-pre-prod",
+    "delius-prod"
+]
+
 pipeline {
 
     agent { label "jenkins_slave" }
@@ -152,46 +160,18 @@ pipeline {
             }
         }
 
+        stage('Apply Common Transit Gateway Configuration to accounts') {
+          steps {
+              script {
+                  for (account in accounts) {
+                      catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                        do_terraform(project.config, 'delius-core-dev', project.transit_gateway, 'transit-gateway-common')
+                      }
+                  }
+              }
+          }
+        }
   
-        stage('Apply Analytics Platform Transit Gateway Configuration to delius-core-dev') {
-          steps {
-            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-              do_terraform(project.config, 'delius-core-dev', project.transit_gateway, 'transit-gateway-common')
-            }
-          }
-        }
-
-        stage('Apply Analytics Platform Transit Gateway Configuration to delius-core-sandpit') {
-          steps {
-            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-              do_terraform(project.config, 'delius-core-sandpit', project.transit_gateway, 'transit-gateway-common')
-            }
-          }
-        }
-
-        stage('Apply Analytics Platform Transit Gateway Configuration to delius-stage') {
-          steps {
-            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-              do_terraform(project.config, 'delius-stage', project.transit_gateway, 'transit-gateway-common')
-            }
-          }
-        }
-
-        stage('Apply Analytics Platform Transit Gateway Configuration to delius-pre-prod') {
-          steps {
-            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-              do_terraform(project.config, 'delius-pre-prod', project.transit_gateway, 'transit-gateway-common')
-            }
-          }
-        }
-
-        stage('Apply Analytics Platform Transit Gateway Configuration to delius-prod') {
-          steps {
-            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-              do_terraform(project.config, 'delius-prod', project.transit_gateway, 'transit-gateway-common')
-            }
-          }
-        }
     }
 
     post {

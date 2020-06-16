@@ -122,6 +122,15 @@ def debug_env() {
     '''
 }
 
+def accounts = [
+    "delius-core-dev",
+    "delius-core-sandpit",
+    "delius-stage",
+    "delius-pre-prod",
+    "delius-prod"
+]
+
+
 pipeline {
 
     agent { label "jenkins_slave" }
@@ -131,67 +140,38 @@ pipeline {
     }
 
     parameters {
-        string(name: 'CONFIG_BRANCH', description: 'Target Branch for hmpps-env-configs', defaultValue: 'master')
-        string(name: 'TRANSIT_GATEWAY_BRANCH', description: 'Target Branch for hmpps-delius-transit-gateway', defaultValue: 'master')
+      string(name: 'CONFIG_BRANCH', description: 'Target Branch for hmpps-env-configs', defaultValue: 'master')
+      string(name: 'TRANSIT_GATEWAY_BRANCH', description: 'Target Branch for hmpps-delius-transit-gateway', defaultValue: 'master')
     }
 
     stages {
 
-        stage('setup') {
-            steps {
-
-                slackSend(message: "Transit Gateway Attachments to Analytics PlatformsVPC Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL.replace(':8080','')}|Open>)")
-            
-                dir( project.config ) {
-                    git url: 'git@github.com:ministryofjustice/' + project.config, branch: env.CONFIG_BRANCH, credentialsId: 'f44bc5f1-30bd-4ab9-ad61-cc32caf1562a'
-                }
-                dir( project.transit_gateway ) {
-                  git url: 'git@github.com:ministryofjustice/' + project.transit_gateway, branch: env.TRANSIT_GATEWAY_BRANCH, credentialsId: 'f44bc5f1-30bd-4ab9-ad61-cc32caf1562a'
-                }
-                prepare_env()
+      stage('setup') {
+        steps {
+            slackSend(message: "Transit Gateway Attachments to Analytics PlatformsVPC Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL.replace(':8080','')}|Open>)")
+        
+            dir( project.config ) {
+                git url: 'git@github.com:ministryofjustice/' + project.config, branch: env.CONFIG_BRANCH, credentialsId: 'f44bc5f1-30bd-4ab9-ad61-cc32caf1562a'
             }
+            dir( project.transit_gateway ) {
+              git url: 'git@github.com:ministryofjustice/' + project.transit_gateway, branch: env.TRANSIT_GATEWAY_BRANCH, credentialsId: 'f44bc5f1-30bd-4ab9-ad61-cc32caf1562a'
+            }
+            prepare_env()
         }
+      }
 
-  
-        stage('Apply Analytics Platforms Transit Gateway Configuration to delius-core-dev') {
+      stage('Apply Analytics Platforms Transit Gateway Configuration to accounts') {
           steps {
-            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-              do_terraform(project.config, 'delius-core-dev', project.transit_gateway, 'transit-gateway-analytics-platform')
-            }
+              script {
+                  for (account in accounts) {
+                      catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                        do_terraform(project.config, account, project.transit_gateway, 'transit-gateway-analytics-platform')
+                      }
+                  }
+              }
           }
-        }
+      }
 
-        stage('Apply Analytics Platforms Transit Gateway Configuration to delius-core-sandpit') {
-          steps {
-            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-              do_terraform(project.config, 'delius-core-sandpit', project.transit_gateway, 'transit-gateway-analytics-platform')
-            }
-          }
-        }
-
-        stage('Apply Analytics Platforms Transit Gateway Configuration to delius-stage') {
-          steps {
-            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-              do_terraform(project.config, 'delius-stage', project.transit_gateway, 'transit-gateway-analytics-platform')
-            }
-          }
-        }
-
-        stage('Apply Analytics Platforms Transit Gateway Configuration to delius-pre-prod') {
-          steps {
-            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-              do_terraform(project.config, 'delius-pre-prod', project.transit_gateway, 'transit-gateway-analytics-platform')
-            }
-          }
-        }
-
-        stage('Apply Analytics Platforms Transit Gateway Configuration to delius-prod') {
-          steps {
-            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-              do_terraform(project.config, 'delius-prod', project.transit_gateway, 'transit-gateway-analytics-platform')
-            }
-          }
-        }
     }
 
     post {
