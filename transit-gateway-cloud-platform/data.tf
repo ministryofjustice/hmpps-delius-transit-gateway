@@ -25,7 +25,9 @@ data "terraform_remote_state" "common" {
 
   config {
     bucket = "${var.remote_state_bucket_name}"
-    key    = "common/terraform.tfstate"
+    key    = "delius-transit-gateway-attachments/transit-gateway-common/terraform.tfstate"
     region = "${var.region}"
   }
 }
+
+
