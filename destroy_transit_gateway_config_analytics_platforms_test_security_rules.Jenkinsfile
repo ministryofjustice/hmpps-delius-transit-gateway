@@ -42,11 +42,11 @@ def plan_submodule(config_dir, env_name, git_project_dir, submodule_name) {
     }
 }
 
-def apply_submodule(config_dir, env_name, git_project_dir, submodule_name) {
+def destroy_submodule(config_dir, env_name, git_project_dir, submodule_name) {
     wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
         sh """
         #!/usr/env/bin bash
-        echo "TF APPLY for ${env_name} | ${submodule_name} - component from git project ${git_project_dir}"
+        echo "TF DESTROY for ${env_name} | ${submodule_name} - component from git project ${git_project_dir}"
         set +e
         cp -R -n "${config_dir}" "${git_project_dir}/env_configs"
         cd "${git_project_dir}"
@@ -56,7 +56,7 @@ def apply_submodule(config_dir, env_name, git_project_dir, submodule_name) {
           bash -c " \
               source env_configs/${env_name}/${env_name}.properties; \
               cd ${submodule_name}; \
-              terragrunt apply ${env_name}.plan; \
+              terragrunt destroy -auto-approve ${env_name}.plan; \
               tgexitcode=\\\$?; \
               echo \\\"TG exited with code \\\$tgexitcode\\\"; \
               if [ \\\$tgexitcode -ne 0 ]; then \
@@ -76,8 +76,8 @@ def confirm() {
     try {
         timeout(time: 15, unit: 'MINUTES') {
             env.Continue = input(
-                id: 'Proceed1', message: 'Apply plan?', parameters: [
-                    [$class: 'BooleanParameterDefinition', defaultValue: true, description: '', name: 'Apply Terraform']
+                id: 'Proceed1', message: 'Destroy plan?', parameters: [
+                    [$class: 'BooleanParameterDefinition', defaultValue: true, description: '', name: 'Destroy Terraform']
                 ]
             )
         }
@@ -93,7 +93,7 @@ def confirm() {
     }
 }
 
-def do_terraform(config_dir, env_name, git_project, component) {
+def do_terraform_destroy(config_dir, env_name, git_project, component) {
     plancode = plan_submodule(config_dir, env_name, git_project, component)
     if (plancode == "2") {
         if ("${confirmation}" == "true") {
@@ -102,11 +102,11 @@ def do_terraform(config_dir, env_name, git_project, component) {
             env.Continue = true
         }
         if (env.Continue == "true") {
-            apply_submodule(config_dir, env_name, git_project, component)
+            destroy_submodule(config_dir, env_name, git_project, component)
         }
     }
     else if (plancode == "3") {
-        apply_submodule(config_dir, env_name, git_project, component)
+        destroy_submodule(config_dir, env_name, git_project, component)
         env.Continue = true
     }
     else {
@@ -146,7 +146,7 @@ pipeline {
 
       stage('setup') {
         steps {
-            slackSend(message: "Transit Gateway Attachments to Analytics PlatformsVPC Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL.replace(':8080','')}|Open>)")
+            slackSend(message: "Analytics Platforms security group rules Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL.replace(':8080','')}|Open>)")
         
             dir( project.config ) {
                 git url: 'git@github.com:ministryofjustice/' + project.config, branch: env.CONFIG_BRANCH, credentialsId: 'f44bc5f1-30bd-4ab9-ad61-cc32caf1562a'
@@ -158,12 +158,12 @@ pipeline {
         }
       }
 
-      stage('Apply Analytics Platforms Transit Gateway Configuration to accounts') {
+      stage('Add Analytics Platforms security group rules to accounts') {
           steps {
               script {
                   for (account in accounts) {
                       catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                        do_terraform(project.config, account, project.transit_gateway, 'transit-gateway-analytics-platform')
+                        do_terraform_destroy(project.config, account, project.transit_gateway, 'transit-gateway-analytics-platform-test-rules')
                       }
                   }
               }
@@ -178,10 +178,10 @@ pipeline {
 
         }
         success {
-            slackSend(message: "Transit Gateway Attachments to Analytics Platforms Build Completed - ${env.JOB_NAME} ${env.BUILD_NUMBER} ", color: 'good')
+            slackSend(message: "Analytics Platforms security group rules Build Completed - ${env.JOB_NAME} ${env.BUILD_NUMBER} ", color: 'good')
         }
         failure {
-            slackSend(message: "Transit Gateway Attachments to Analytics Platforms Build Failed - ${env.JOB_NAME} ${env.BUILD_NUMBER} ", color: 'danger')
+            slackSend(message: "Analytics Platforms security group rules Build Failed - ${env.JOB_NAME} ${env.BUILD_NUMBER} ", color: 'danger')
         }
     }
 }

@@ -123,7 +123,9 @@ def debug_env() {
 }
 
 def accounts = [
+    "delius-core-dev",
     "delius-core-sandpit",
+    "delius-stage",
     "delius-pre-prod",
     "delius-prod"
 ]
@@ -146,7 +148,7 @@ pipeline {
 
       stage('setup') {
         steps {
-            slackSend(message: "Transit Gateway Attachments to Analytics PlatformsVPC Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL.replace(':8080','')}|Open>)")
+            slackSend(message: "Analytics Platforms security group rules Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL.replace(':8080','')}|Open>)")
         
             dir( project.config ) {
                 git url: 'git@github.com:ministryofjustice/' + project.config, branch: env.CONFIG_BRANCH, credentialsId: 'f44bc5f1-30bd-4ab9-ad61-cc32caf1562a'
@@ -158,12 +160,12 @@ pipeline {
         }
       }
 
-      stage('Apply Analytics Platforms Transit Gateway Configuration to accounts') {
+      stage('Add Analytics Platforms security group rules to accounts') {
           steps {
               script {
                   for (account in accounts) {
                       catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                        do_terraform(project.config, account, project.transit_gateway, 'transit-gateway-analytics-platform')
+                        do_terraform(project.config, account, project.transit_gateway, 'transit-gateway-cloud-platform-test-rules')
                       }
                   }
               }
@@ -178,10 +180,10 @@ pipeline {
 
         }
         success {
-            slackSend(message: "Transit Gateway Attachments to Analytics Platforms Build Completed - ${env.JOB_NAME} ${env.BUILD_NUMBER} ", color: 'good')
+            slackSend(message: "CloudPlatforms security group rules Build Completed - ${env.JOB_NAME} ${env.BUILD_NUMBER} ", color: 'good')
         }
         failure {
-            slackSend(message: "Transit Gateway Attachments to Analytics Platforms Build Failed - ${env.JOB_NAME} ${env.BUILD_NUMBER} ", color: 'danger')
+            slackSend(message: "CloudPlatforms security group rules Build Failed - ${env.JOB_NAME} ${env.BUILD_NUMBER} ", color: 'danger')
         }
     }
 }

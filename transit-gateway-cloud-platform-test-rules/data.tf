@@ -13,21 +13,25 @@ data "terraform_remote_state" "vpc" {
   }
 }
 
-# Get current context for things like account id
-data "aws_caller_identity" "current" {}
-
-#====================================================
-# remote state for common (transit gateway id)
-#====================================================
-
-data "terraform_remote_state" "common" {
+data "terraform_remote_state" "security_groups" {
   backend = "s3"
 
   config {
     bucket = "${var.remote_state_bucket_name}"
-    key    = "delius-transit-gateway-attachments/transit-gateway-common/terraform.tfstate"
+    key    = "security-groups/terraform.tfstate"
     region = "${var.region}"
   }
 }
 
+data "terraform_remote_state" "cloudplatform" {
+  backend = "s3"
 
+  config {
+    bucket = "${var.remote_state_bucket_name}"
+    key    = "delius-transit-gateway-attachments/transit-gateway-cloud-platform/terraform.tfstate"
+    region = "${var.region}"
+  }
+}
+
+# Get current context for things like account id
+data "aws_caller_identity" "current" {}
