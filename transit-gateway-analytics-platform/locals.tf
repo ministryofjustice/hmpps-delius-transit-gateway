@@ -31,6 +31,7 @@ locals {
   create_analytics_dev_routes = {
     delius-core-dev     = "1"
     delius-core-sandpit = "1"
+    delius-stage        = "1"
   }
 
   env_create_analytics_dev_routes = "${lookup(local.create_analytics_dev_routes, "${local.environment_name}" , 0) }"

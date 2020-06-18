@@ -27,6 +27,7 @@ locals {
   create_analytics_dev_security_group_rules = {
     delius-core-dev     = "1"
     delius-core-sandpit = "1"
+    delius-stage        = "1"
   }
 
   env_create_analytics_dev_security_group_rules = "${lookup(local.create_analytics_dev_security_group_rules, "${local.environment_name}" , 0) }"
@@ -39,6 +40,5 @@ locals {
   }
 
   env_create_analytics_prod_security_group_rules = "${lookup(local.create_analytics_prod_security_group_rules, "${local.environment_name}" , 0) }"
-
 
 }
