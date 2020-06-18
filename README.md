@@ -186,17 +186,17 @@ Notes:
 | Number | Stage         | Jenkins Job | Jenkinsfile                                                  |
 |---|---------------|-------------|--------------------------------------------------------------|
 | 1 | common        | https://jenkins.engineering-dev.probation.hmpps.dsd.io/job/Ops/job/Delius-TransitGateway-Connections/job/1-Common-Apply/            | apply_transit_gateway_config_common.Jenkinsfile              |
-| 2a | cloudplatform | https://jenkins.engineering-dev.probation.hmpps.dsd.io/job/Ops/job/Delius-TransitGateway-Connections/job/2b-Cloudplatform-Apply/            | apply_transit_gateway_config_cloudplatform.Jenkinsfile       |
+| 2a | cloudplatform | https://jenkins.engineering-dev.probation.hmpps.dsd.io/job/Ops/job/Delius-TransitGateway-Connections/job/2a-Cloudplatform-Apply/            | apply_transit_gateway_config_cloudplatform.Jenkinsfile       |
 | 2b | analytics     | https://jenkins.engineering-dev.probation.hmpps.dsd.io/job/Ops/job/Delius-TransitGateway-Connections/job/2b-AnalyticsPlatforms-Apply/            | apply_transit_gateway_config_analytics_platforms.Jenkinsfile |
-| 3a | analytics-test-rules     | https://jenkins.engineering-dev.probation.hmpps.dsd.io/job/Ops/job/Delius-TransitGateway-Connections/job/3a-AnalyticsPlatforms-Apply/            | apply_transit_gateway_config_analytics_platforms_test_security_rules.Jenkinsfile |
-| 3b | cloudplatform-test-rules     | https://jenkins.engineering-dev.probation.hmpps.dsd.io/job/Ops/job/Delius-TransitGateway-Connections/job/3b-AnalyticsPlatforms-Apply/            | apply_transit_gateway_config_cloud_platform_test_security_rules.Jenkinsfile |
+| 3a | cloudplatform-test-rules     | https://jenkins.engineering-dev.probation.hmpps.dsd.io/job/Ops/job/Delius-TransitGateway-Connections/job/3a-Cloudplatform-Test-SecurityGroup-Rules-Apply/            | apply_transit_gateway_config_cloud_platform_test_security_rules.Jenkinsfile |
+| 3b | analytics-test-rules     | https://jenkins.engineering-dev.probation.hmpps.dsd.io/job/Ops/job/Delius-TransitGateway-Connections/job/3b-AnalyticsPlatform-Test-SecurityGroup-Rules-Apply/            | apply_transit_gateway_config_analytics_platforms_test_security_rules.Jenkinsfile |
 
 ### Deleting the security group rules once testing is completed
 
 | Number | Stage         | Jenkins Job | Jenkinsfile                                                  |
 |---|---------------|-------------|--------------------------------------------------------------|
-| 4a | analytics-test-rules     | https://jenkins.engineering-dev.probation.hmpps.dsd.io/job/Ops/job/Delius-TransitGateway-Connections/job/4a-CloudPlatform-destroy/            | destroy_transit_gateway_config_analytics_platforms_test_security_rules.Jenkinsfile |
-| 4b | cloudplatform-test-rules     | https://jenkins.engineering-dev.probation.hmpps.dsd.io/job/Ops/job/Delius-TransitGateway-Connections/job/4b-AnalyticsPlatforms-Apply/            | destroy_transit_gateway_config_cloud_platform_test_security_rules.Jenkinsfile |
+| 4a | analytics-test-rules     | https://jenkins.engineering-dev.probation.hmpps.dsd.io/job/Ops/job/Delius-TransitGateway-Connections/job/4a-CloudPlatform-Test-SecurityGroup-Rules-destroy/            | destroy_transit_gateway_config_analytics_platforms_test_security_rules.Jenkinsfile |
+| 4b | cloudplatform-test-rules     | https://jenkins.engineering-dev.probation.hmpps.dsd.io/job/Ops/job/Delius-TransitGateway-Connections/job/4b-AnalyticsPlatforms-Test-SecurityGroup-Rules-Destroy/            | destroy_transit_gateway_config_cloud_platform_test_security_rules.Jenkinsfile |
 
 
 ### Github Actions
