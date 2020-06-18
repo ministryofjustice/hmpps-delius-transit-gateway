@@ -42,7 +42,7 @@ data "terraform_remote_state" "security_groups" {
 
   config {
     bucket = "${var.remote_state_bucket_name}"
-    key    = "delius-core/security-groups/terraform.tfstate"
+    key    = "security-groups/terraform.tfstate"
     region = "${var.region}"
   }
 }
