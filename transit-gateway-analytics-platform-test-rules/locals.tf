@@ -17,7 +17,6 @@ locals {
 
   # Only create the security group rule to allow connectivity testing in these environments for Analytics ALPHA
   create_analytics_alpha_security_group_rules = {
-    delius-core-dev     = "1"
     delius-core-sandpit = "1"
   }
 
@@ -25,16 +24,13 @@ locals {
 
   # Only create the security group rule to allow connectivity testing in these environments for Analytics DEV
   create_analytics_dev_security_group_rules = {
-    delius-core-dev     = "1"
     delius-core-sandpit = "1"
-    delius-stage        = "1"
   }
 
   env_create_analytics_dev_security_group_rules = "${lookup(local.create_analytics_dev_security_group_rules, "${local.environment_name}" , 0) }"
 
   # Only create the security group rule to allow connectivity testing in these environments for Analytics PROD
   create_analytics_prod_security_group_rules = {
-    delius-stage        = "1"
     delius-pre-prod     = "1"
     delius-prod         = "1"
   }

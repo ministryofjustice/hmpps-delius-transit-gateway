@@ -123,9 +123,7 @@ def debug_env() {
 }
 
 def accounts = [
-    "delius-core-dev",
     "delius-core-sandpit",
-    "delius-stage",
     "delius-pre-prod",
     "delius-prod"
 ]

@@ -21,7 +21,6 @@ locals {
 
   # Only create the routes to allow connectivity testing in these environments for Analytics ALPHA
   create_analytics_alpha_routes = {
-    delius-core-dev     = "1"
     delius-core-sandpit = "1"
   }
 
@@ -29,16 +28,13 @@ locals {
 
   # Only create the routes to allow connectivity testing in these environments for Analytics DEV
   create_analytics_dev_routes = {
-    delius-core-dev     = "1"
     delius-core-sandpit = "1"
-    delius-stage        = "1"
   }
 
   env_create_analytics_dev_routes = "${lookup(local.create_analytics_dev_routes, "${local.environment_name}" , 0) }"
 
   # Only create the routes to allow connectivity testing in these environments for Analytics PROD
   create_analytics_prod_routes = {
-    delius-stage        = "1"
     delius-pre-prod     = "1"
     delius-prod         = "1"
   }
