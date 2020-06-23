@@ -41,4 +41,29 @@ locals {
 
   env_create_analytics_prod_routes = "${lookup(local.create_analytics_prod_routes, "${local.environment_name}" , 0) }"
   
+
+  # Only create the security group ingress in these environments for Analytics ALPHA
+  create_analytics_alpha_security_group_ingress = {
+    delius-core-sandpit = "1"
+  }
+
+  env_create_analytics_alpha_security_group_ingress = "${lookup(local.create_analytics_alpha_security_group_ingress, "${local.environment_name}" , 0) }"
+
+  # Only create the security group ingress in these environments for Analytics DEV
+  create_analytics_dev_security_group_ingress = {
+    delius-core-sandpit = "1"
+  }
+
+  env_create_analytics_dev_security_group_ingress = "${lookup(local.create_analytics_dev_security_group_ingress, "${local.environment_name}" , 0) }"
+
+  # Only create the security group ingress in these environments for Analytics PROD
+  create_analytics_prod_security_group_ingress = {
+    delius-pre-prod     = "1"
+    delius-prod         = "1"
+  }
+
+  env_create_analytics_prod_security_group_ingress = "${lookup(local.create_analytics_prod_security_group_ingress, "${local.environment_name}" , 0) }"
+  
+
+
 }

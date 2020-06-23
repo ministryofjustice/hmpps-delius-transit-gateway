@@ -27,5 +27,16 @@ data "terraform_remote_state" "vpc" {
   }
 }
 
+data "terraform_remote_state" "security_groups" {
+  backend = "s3"
+
+  config {
+    bucket = "${var.remote_state_bucket_name}"
+    key    = "security-groups/terraform.tfstate"
+    region = "${var.region}"
+  }
+}
+
+
 # Get current context for things like account id
 data "aws_caller_identity" "current" {}
