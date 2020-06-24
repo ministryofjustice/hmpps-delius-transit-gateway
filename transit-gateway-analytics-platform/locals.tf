@@ -21,7 +21,7 @@ locals {
 
   # Only create the routes to allow connectivity testing in these environments for Analytics ALPHA
   create_analytics_alpha_routes = {
-    delius-core-sandpit = "1"
+    delius-pre-prod = "1"
   }
 
   env_create_analytics_alpha_routes = "${lookup(local.create_analytics_alpha_routes, "${local.environment_name}" , 0) }"
@@ -44,7 +44,7 @@ locals {
 
   # Only create the security group ingress in these environments for Analytics ALPHA
   create_analytics_alpha_security_group_ingress = {
-    delius-core-sandpit = "1"
+    delius-pre-prod = "1"
   }
 
   env_create_analytics_alpha_security_group_ingress = "${lookup(local.create_analytics_alpha_security_group_ingress, "${local.environment_name}" , 0) }"

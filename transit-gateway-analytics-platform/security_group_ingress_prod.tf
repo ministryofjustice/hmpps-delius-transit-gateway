@@ -1,4 +1,4 @@
-resource "aws_security_group_rule" "analytics_prod_test_ingress_delius_db_in_oracle_1521" {
+resource "aws_security_group_rule" "analytics_prod_ingress_delius_db_in_oracle_1521" {
   count             = "${local.env_create_analytics_prod_security_group_ingress}"
   type              = "ingress"
   protocol          = "tcp"

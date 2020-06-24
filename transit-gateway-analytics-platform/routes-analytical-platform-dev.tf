@@ -60,8 +60,8 @@
 // }
 
 resource "aws_route" "transit_gateway_route_vpc_db-routetable-az3-apde-dev" {
-  count                  = "${local.env_create_analytics_dev_routes}"
   route_table_id         = "${data.terraform_remote_state.vpc.vpc_db-routetable-az3}"
   transit_gateway_id     = "${data.terraform_remote_state.common.transit_gateway_id}"
   destination_cidr_block = "${local.analyticalplatform_dev_cidr_range}"
+  count                  = "${local.env_create_analytics_dev_routes}"
 }
