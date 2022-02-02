@@ -8,5 +8,7 @@ phases:
       - make ${ACTION_TYPE} component=${COMPONENT}
 
 artifacts:
+  exclude-paths:
+     - ${CODEBUILD_SRC_DIR}/env_configs
   files:
     - '**/*'
