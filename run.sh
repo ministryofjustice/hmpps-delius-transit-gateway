@@ -30,7 +30,7 @@ then
 else
     echo "USING CUSTOM WORKDIR for configs: $HMPPS_BUILD_WORK_DIR"
     env_config_dir="${HMPPS_BUILD_WORK_DIR}/env_configs"
-    [ ! -d "${env_config_dir}" ] || mkdir ${env_config_dir} && cp -r $CODEBUILD_SRC_DIR_config/* ${HMPPS_BUILD_WORK_DIR}/env_configs
+    [ ! -d "${env_config_dir}" ] || mkdir ${env_config_dir} && cp -r $CODEBUILD_SRC_DIR_config/* ${env_config_dir}
 fi
 
 ENVIRONMENT_NAME_ARG=$1
