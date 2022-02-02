@@ -32,4 +32,6 @@ locals {
   #      "${local.public_subnets}",
   #      "${local.db_subnets}"
   #  ]
+
+  tags = "${merge(var.tags, map("source-code", "https://github.com/ministryofjustice/hmpps-delius-transit-gateway"))}"
 }
