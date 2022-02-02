@@ -6,10 +6,6 @@ phases:
       - export HMPPS_BUILD_WORK_DIR=${CODEBUILD_SRC_DIR}
       - echo "make ${ACTION_TYPE} component=${COMPONENT}"
       - make ${ACTION_TYPE} component=${COMPONENT}
-      
-  post_build:
-    commands:
-      - rm -rf ${CODEBUILD_SRC_DIR}/env_configs
 
 artifacts:
   files:

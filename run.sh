@@ -22,6 +22,9 @@ exit_on_error() {
   fi
 }
 
+ENVIRONMENT_NAME_ARG=$1
+ACTION_TYPE=$2
+COMPONENT=${3}
 
 if [ -z "${HMPPS_BUILD_WORK_DIR}" ]
 then
@@ -30,13 +33,12 @@ then
 else
     echo "USING CUSTOM WORKDIR for configs: $HMPPS_BUILD_WORK_DIR"
     env_config_dir="${HMPPS_BUILD_WORK_DIR}/env_configs"
-    mkdir ${env_config_dir}
-    cp -r $CODEBUILD_SRC_DIR_config/* ${HMPPS_BUILD_WORK_DIR}/env_configs
-fi
 
-ENVIRONMENT_NAME_ARG=$1
-ACTION_TYPE=$2
-COMPONENT=${3}
+    if [ $ACTION_TYPE != "apply" ]
+        mkdir ${env_config_dir}
+        cp -r $CODEBUILD_SRC_DIR_config/* ${HMPPS_BUILD_WORK_DIR}/env_configs
+    fi
+fi
 
 if [ -z "${ENVIRONMENT_NAME_ARG}" ]
 then
