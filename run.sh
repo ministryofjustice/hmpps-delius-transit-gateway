@@ -35,6 +35,7 @@ else
     env_config_dir="${HMPPS_BUILD_WORK_DIR}/env_configs"
 
     if [ $ACTION_TYPE != "apply" ]
+    then
         mkdir ${env_config_dir}
         cp -r $CODEBUILD_SRC_DIR_config/* ${HMPPS_BUILD_WORK_DIR}/env_configs
     fi
