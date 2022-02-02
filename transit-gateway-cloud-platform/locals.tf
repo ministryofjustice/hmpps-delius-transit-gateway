@@ -13,6 +13,13 @@ locals {
   # Account ID: 183554782509
   cloudplatform_cidr_range = "172.20.0.0/16"
 
+  # I2N Landing Environments
+  # Account ID: 778742069978
+  i2n_az1_cidr_range = "10.110.96.0/24"
+  i2n_az2_cidr_range = "10.110.97.0/24"
+  i2n_az3_cidr_range = "10.110.98.0/24"
+
+
   # Only create the routes to allow connectivity testing in these environments for Cloudplatform
   create_cloudplatform_routes = {
     delius-core-dev     = "1"

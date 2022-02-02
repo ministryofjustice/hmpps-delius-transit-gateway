@@ -6,6 +6,7 @@
 ## important ignore due to centralised config
 **/env_configs/*
 **/tmp_config/*
+env_configs**
 
 .idea/
 .gradle/

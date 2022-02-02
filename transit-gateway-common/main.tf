@@ -13,7 +13,7 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "delius_transit_gw_attachment"
   transit_gateway_default_route_table_propagation = "true"
 
   tags = "${merge(
-    var.tags,
+    local.tags,
     map(
         "Name", "${local.transit_gateway_attachment_name}"
     )
