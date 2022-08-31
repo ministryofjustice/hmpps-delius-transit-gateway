@@ -6,6 +6,8 @@ locals {
 
   transit_gateway_id              = "tgw-05acb84d26b244813"
   transit_gateway_attachment_name = "tgwa-${local.environment_name}"
+  pttp_transit_gateway_id              = "tgw-026162f1ba39ce704"
+  pttp_transit_gateway_attachment_name = "pttp-tgwa-${local.environment_name}"
 
   vpc_id = "${data.terraform_remote_state.vpc.vpc_id}"
 
