@@ -27,51 +27,44 @@ locals {
   analyticalplatform_prod_cidr_range = "172.25.0.0/16"
 
   
-
+  # Create variables used to determine when/where to create routes
   create_analytics_alpha_routes = {
     delius-pre-prod = "1"
   }
-
   env_create_analytics_alpha_routes = "${lookup(local.create_analytics_alpha_routes, "${local.environment_name}" , 0) }"
 
   create_analytics_dev_routes = {
     delius-core-sandpit = "1"
   }
-
   env_create_analytics_dev_routes = "${lookup(local.create_analytics_dev_routes, "${local.environment_name}" , 0) }"
 
   create_analytics_pre_prod_routes = {
     delius-pre-prod     = "1"
   }
- 
   env_create_analytics_pre_prod_routes = "${lookup(local.create_analytics_pre_prod_routes, "${local.environment_name}" , 0) }"
  
   create_analytics_prod_routes = {
     delius-pre-prod     = "1"
     delius-prod         = "1"
   }
-
   env_create_analytics_prod_routes = "${lookup(local.create_analytics_prod_routes, "${local.environment_name}" , 0) }"
   
   # Only create the security group ingress in these environments for Analytics ALPHA
   create_analytics_alpha_security_group_ingress = {
     delius-pre-prod = "1"
   }
-
   env_create_analytics_alpha_security_group_ingress = "${lookup(local.create_analytics_alpha_security_group_ingress, "${local.environment_name}" , 0) }"
 
   # Only create the security group ingress in these environments for Analytics DEV
   create_analytics_dev_security_group_ingress = {
     delius-core-sandpit = "1"
   }
-
   env_create_analytics_dev_security_group_ingress = "${lookup(local.create_analytics_dev_security_group_ingress, "${local.environment_name}" , 0) }"
 
   # Only create the security group ingress in these environments for Analytics PRE-PROD
   create_analytics_pre_prod_security_group_ingress = {
     delius-pre-prod     = "1"
   }
-
   env_create_analytics_pre_prod_security_group_ingress = "${lookup(local.create_analytics_pre_prod_security_group_ingress, "${local.environment_name}" , 0) }"
   
   # Only create the security group ingress in these environments for Analytics PROD
@@ -79,9 +72,6 @@ locals {
     delius-pre-prod     = "1"
     delius-prod         = "1"
   }
-
   env_create_analytics_prod_security_group_ingress = "${lookup(local.create_analytics_prod_security_group_ingress, "${local.environment_name}" , 0) }"
-  
-
 
 }
