@@ -12,7 +12,6 @@ locals {
   # Only create the security group rule to allow connectivity testing in these environments for Cloudplatform
   create_cloudplatform_security_group_rules = {
     delius-core-dev     = "1"
-    delius-core-sandpit = "1"
     delius-stage        = "1"
     delius-pre-prod     = "1"
     delius-prod         = "1"

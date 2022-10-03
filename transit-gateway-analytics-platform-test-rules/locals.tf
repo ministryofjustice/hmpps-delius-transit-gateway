@@ -17,14 +17,14 @@ locals {
 
   # Only create the security group rule to allow connectivity testing in these environments for Analytics ALPHA
   create_analytics_alpha_security_group_rules = {
-    delius-core-sandpit = "1"
+    # No environments required to test talking to AP alpha. Was delius-sandpit - but sandpit has now been removed
   }
 
   env_create_analytics_alpha_security_group_rules = "${lookup(local.create_analytics_alpha_security_group_rules, "${local.environment_name}" , 0) }"
 
   # Only create the security group rule to allow connectivity testing in these environments for Analytics DEV
   create_analytics_dev_security_group_rules = {
-    delius-core-sandpit = "1"
+    # No environments required to talk to AP dev - AP are moving towards having local dev dbs
   }
 
   env_create_analytics_dev_security_group_rules = "${lookup(local.create_analytics_dev_security_group_rules, "${local.environment_name}" , 0) }"
