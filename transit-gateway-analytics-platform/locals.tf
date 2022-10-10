@@ -34,7 +34,7 @@ locals {
   env_create_analytics_alpha_routes = "${lookup(local.create_analytics_alpha_routes, "${local.environment_name}" , 0) }"
 
   create_analytics_dev_routes = {
-    delius-core-sandpit = "1"
+    # No environments required to talk to AP dev - AP are moving towards having local dev dbs
   }
   env_create_analytics_dev_routes = "${lookup(local.create_analytics_dev_routes, "${local.environment_name}" , 0) }"
 
@@ -57,7 +57,7 @@ locals {
 
   # Only create the security group ingress in these environments for Analytics DEV
   create_analytics_dev_security_group_ingress = {
-    delius-core-sandpit = "1"
+    # No environments required to talk to AP dev - AP are moving towards having local dev dbs
   }
   env_create_analytics_dev_security_group_ingress = "${lookup(local.create_analytics_dev_security_group_ingress, "${local.environment_name}" , 0) }"
 

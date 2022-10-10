@@ -18,10 +18,6 @@ Applies the terraform code in the `transit-gateway-common` folder.
 tfrun delius-core-dev plan transit-gateway-common hmpps_token
 tfrun delius-core-dev apply transit-gateway-common hmpps_token
 
-# delius-core-sandpit
-tfrun delius-core-dev plan transit-gateway-common hmpps_token
-tfrun delius-core-dev apply transit-gateway-common hmpps_token
-
 # delius-stage
 tfrun delius-core-dev plan transit-gateway-common hmpps_token
 tfrun delius-core-dev apply transit-gateway-common hmpps_token
@@ -41,10 +37,6 @@ Apply the configuration in the `transit-gateway-cloud-platform` folder to create
 
 ```bash
 # delius-core-dev
-tfrun delius-core-dev plan transit-gateway-cloud-platform hmpps_token
-tfrun delius-core-dev apply transit-gateway-cloud-platform hmpps_token
-
-# delius-core-sandpit
 tfrun delius-core-dev plan transit-gateway-cloud-platform hmpps_token
 tfrun delius-core-dev apply transit-gateway-cloud-platform hmpps_token
 
@@ -70,10 +62,6 @@ Apply the configuration in the `transit-gateway-analytics-platform` folder to cr
 tfrun delius-core-dev plan transit-gateway-analytics-platform hmpps_token
 tfrun delius-core-dev apply transit-gateway-analytics-platform hmpps_token
 
-# delius-core-sandpit
-tfrun delius-core-dev plan transit-gateway-analytics-platform hmpps_token
-tfrun delius-core-dev apply transit-gateway-analytics-platform hmpps_token
-
 # delius-stage
 tfrun delius-core-dev plan transit-gateway-analytics-platform hmpps_token
 tfrun delius-core-dev apply transit-gateway-analytics-platform hmpps_token
@@ -91,10 +79,6 @@ tfrun delius-prod apply transit-gateway-analytics-platform hmpps_token
 
 ```bash
 # delius-core-dev
-tfrun delius-core-dev plan transit-gateway-cloud-platform-test-rules hmpps_token
-tfrun delius-core-dev apply transit-gateway-cloud-platform-test-rules hmpps_token
-
-# delius-core-sandpit
 tfrun delius-core-dev plan transit-gateway-cloud-platform-test-rules hmpps_token
 tfrun delius-core-dev apply transit-gateway-cloud-platform-test-rules hmpps_token
 
@@ -118,10 +102,6 @@ tfrun delius-prod apply transit-gateway-cloud-platform-test-rules hmpps_token
 tfrun delius-core-dev plan transit-gateway-analytics-platform-test-rules hmpps_token
 tfrun delius-core-dev apply transit-gateway-analytics-platform-test-rules hmpps_token
 
-# delius-core-sandpit
-tfrun delius-core-dev plan transit-gateway-analytics-platform-test-rules hmpps_token
-tfrun delius-core-dev apply transit-gateway-analytics-platform-test-rules hmpps_token
-
 # delius-stage
 tfrun delius-core-dev plan transit-gateway-analytics-platform-test-rules hmpps_token
 tfrun delius-core-dev apply transit-gateway-analytics-platform-test-rules hmpps_token
@@ -142,9 +122,6 @@ Warning: Terragrunt destroy won't prompt for destroy
 # delius-core-dev
 tfrun delius-core-dev destroy transit-gateway-cloud-platform-test-rules hmpps_token
 
-# delius-core-sandpit
-tfrun delius-core-dev destroy transit-gateway-cloud-platform-test-rules hmpps_token
-
 # delius-stage
 tfrun delius-core-dev destroy transit-gateway-cloud-platform-test-rules hmpps_token
 
@@ -161,9 +138,6 @@ Warning: Terragrunt destroy won't prompt for destroy
 
 ```bash
 # delius-core-dev
-tfrun delius-core-dev destroy transit-gateway-analytics-platform-test-rules hmpps_token
-
-# delius-core-sandpit
 tfrun delius-core-dev destroy transit-gateway-analytics-platform-test-rules hmpps_token
 
 # delius-stage
