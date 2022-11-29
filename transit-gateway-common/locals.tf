@@ -4,8 +4,8 @@ locals {
   environment_name = "${var.project_name}-${var.environment_type}"
   account_ids      = "${var.aws_account_ids}"
 
-  transit_gateway_id              = "tgw-05acb84d26b244813"
-  transit_gateway_attachment_name = "tgwa-${local.environment_name}"
+  # transit_gateway_id              = "tgw-05acb84d26b244813"
+  # transit_gateway_attachment_name = "tgwa-${local.environment_name}"
   pttp_transit_gateway_id              = "tgw-026162f1ba39ce704"
   pttp_transit_gateway_attachment_name = "pttp-tgwa-${local.environment_name}"
 
