@@ -2,8 +2,10 @@
 
 locals {
   environment_name = "${var.project_name}-${var.environment_type}"
-  account_ids      = var.aws_account_ids
-  vpc_id           = data.terraform_remote_state.vpc.vpc_id
+  account_ids      = "${var.aws_account_ids}"
+  vpc_id           = "${data.terraform_remote_state.vpc.vpc_id}"
+
+
 
 
   # Modernisation Platform
