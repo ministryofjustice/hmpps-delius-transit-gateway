@@ -6,8 +6,8 @@ locals {
   vpc_id           = data.terraform_remote_state.vpc.vpc_id
 
 
-  # Modernisation Platform (All k8s Environments)
-  mp_cidr_ranges = ["172.20.0.0/16"]
+  # Modernisation Platform
+  mp_cidr_ranges = [""]
 
   # Only create the routes to allow connectivity testing in these environments for modernisation platform
   create_modplatform_routes = {
