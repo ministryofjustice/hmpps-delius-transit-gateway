@@ -7,6 +7,7 @@ locals {
 
 
   # Modernisation Platform
+  # see https://github.com/ministryofjustice/modernisation-platform/blob/main/cidr-allocation.md
   mp_cidr_ranges_low  = ["10.26.0.0/16"]
   mp_cidr_ranges_high = ["10.27.0.0/16"]
 
