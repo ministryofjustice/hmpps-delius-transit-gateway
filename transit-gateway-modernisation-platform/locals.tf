@@ -18,12 +18,12 @@ locals {
     delius-core-dev = true
     delius-test     = true
   }
-  env_create_modplatform_routes_low = lookup(local.create_modplatform_routes_low, "${local.environment_name}", false)
+  env_create_modplatform_routes_low = "${lookup(local.create_modplatform_routes_low, "${local.environment_name}", false)}"
 
   create_modplatform_routes_high = {
     delius-stage    = true
     delius-pre-prod = true
     delius-prod     = true
   }
-  env_create_modplatform_routes_high = lookup(local.create_modplatform_routes_high, "${local.environment_name}", false)
+  env_create_modplatform_routes_high = "${lookup(local.create_modplatform_routes_high, "${local.environment_name}", false)}"
 }
