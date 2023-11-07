@@ -20,18 +20,18 @@ locals {
 
   # Only create the routes to allow connectivity testing in these environments for Cloudplatform
   create_cloudplatform_routes = {
-    delius-core-dev     = "1"
-    delius-test         = "1"
-    delius-stage        = "1"
-    delius-pre-prod     = "1"
-    delius-prod         = "1"
+    delius-mis-dev  = "1"
+    delius-test     = "1"
+    delius-stage    = "1"
+    delius-pre-prod = "1"
+    delius-prod     = "1"
   }
   env_create_cloudplatform_routes = "${lookup(local.create_cloudplatform_routes, "${local.environment_name}" , 0) }"
 
   create_i2n_routes = {
-    delius-core-dev     = "1"
-    delius-stage        = "1"
-    delius-prod         = "1"
+    delius-mis-dev  = "1"
+    delius-stage    = "1"
+    delius-prod     = "1"
   }
   env_create_i2n_routes = "${lookup(local.create_i2n_routes, "${local.environment_name}" , 0) }"
 

@@ -15,9 +15,8 @@ locals {
 
   # Only create the routes to allow connectivity testing in these environments for modernisation platform
   create_modplatform_routes_low = {
-    delius-core-dev = "1"
-    delius-mis-dev  = "1"
-    delius-test     = "1"
+    delius-mis-dev = "1"
+    delius-test    = "1"
   }
   env_create_modplatform_routes_low = "${lookup(local.create_modplatform_routes_low, "${local.environment_name}", 0)}"
 
